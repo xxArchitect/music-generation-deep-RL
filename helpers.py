@@ -10,7 +10,6 @@
 import os
 from midiutil import MIDIFile
 from midi2audio import FluidSynth
-import numpy as np
 
 def piano_roll_to_midi(piano_roll, filename, tempo, lowest_note, rhythmic_precision):
     """
@@ -85,21 +84,21 @@ def midi_to_audio(midi_file, filename, soundfont):
     Converts a MIDI file to an audio (.wav) file.
 
     Parameters:
-        midi_file (string): The path to the MIDI file to be converted.
+        midi_file (string): The path to the MIDI (.mid) file to be converted.
         filename (string): The desired filename of the audio file.
         soundfont (string): The path to the soundfont (.sf2) file.
 
     Returns:
-        (string): The path to the new MIDI file.
+        (string): The path to the new audio file.
     """
 
     # Make output folder (if not already existing) for the audio file
     os.makedirs("output", exist_ok=True)
     output_file = os.path.join("output", f"{filename}.wav")
 
-    # Add fluidsynth.exe to environment variables for use
-    fluidsynth_path = os.path.join("fluidsynth-2.4.0-win10-x64", "bin", "fluidsynth.exe")
-    os.environ["FLUIDSYNTH"] = fluidsynth_path
+    # Add fluidsynth.exe to Path environment variable for use
+    fluidsynth_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fluidsynth-2.4.0-win10-x64", "bin")
+    os.environ["PATH"] += os.pathsep + fluidsynth_path 
 
     # Initialize FluidSynth with the soundfont
     fs = FluidSynth(soundfont)

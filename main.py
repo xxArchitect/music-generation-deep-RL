@@ -98,6 +98,7 @@ def show_results(results, tempo, rhythmic_precision, note_range):
     # Infinite length/width when printing arrays; prevents shortened piano rolls
     np.set_printoptions(threshold=np.inf)
 
+    # Note labels for terminal output
     notes = ["C", "#", "D", "#", "E", "F", "#", "G", "#", "A", "#", "B",]
     piano_roll_header = "  "
     for note in range(note_range):
