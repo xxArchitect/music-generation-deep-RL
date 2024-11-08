@@ -97,16 +97,16 @@ class Env():
                 self.state[i] = 0
 
         # Update state based on action:
-
         # If a play action is detected, put a 1 at the corresponding pitch
         if action in self.PLAY:
             self.state[-1][action] = 1
 
         # If a sustain action is detected, put a 2 at the corresponding pitch
         # only if there is a note before it to be sustained (not a 0)
+        
         elif action == self.SUSTAIN:
             for i in range(self.num_actions - 2):
-                if self.state[-1][i] != 0:
+                if self.state[-2][i] != 0:
                     self.state[-1][i] = 2
         
         # If a rest action is detected, the new interval is already initialized
@@ -115,7 +115,9 @@ class Env():
             pass
 
         # TO-DO reward structure
+        # if action == x: reward += 1
+        # if action == y: reward -= 1
+        # etc.
         reward = 0
-        
 
         return self.state, reward
