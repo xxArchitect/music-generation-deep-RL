@@ -148,7 +148,7 @@ def main():
     # The number of actions will be the number of notes the agent can play, plus a sustain
     # and rest action. The note/pitch range should be reduced down from a full piano range
     # of 88 notes for feasibility. Two octaves (25 notes) should be sufficient.
-    num_actions = 15
+    num_actions = 27
 
     # Example piano roll with a single-octave pitch range (15 actions):
     # 0 - no note, 1 - note, 2 - sustain last note
@@ -187,7 +187,7 @@ def main():
     # memory of what notes it played which could make it difficult to reward repetitive
     # note sequences.
     state_length = 4
-    num_states = np.power(num_actions, state_length + 1) 
+    num_states = np.power(num_actions, state_length) 
     
     env = Env(state_length, num_actions, num_states)
     agent = Agent(gamma, step_size, epsilon, num_actions, num_states)
