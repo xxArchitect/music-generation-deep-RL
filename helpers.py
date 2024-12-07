@@ -44,7 +44,7 @@ def piano_roll_to_midi(piano_roll, filename, tempo, lowest_note, rhythmic_precis
 
     # Loop through each interval of time in the piano roll backwards.
     # (Iterating backwards simplifies the logic for sustained notes)
-    for interval in range(len(piano_roll) - 1, 0, -1):
+    for interval in range(len(piano_roll) - 1, -1, -1):
         
         for pitch in range(len(piano_roll[interval])):
 
